@@ -21,7 +21,7 @@ class Fragment:
 def shunt(infix):
     infix = list(infix)[::-1]
 
-    OperationStack = []
+    OperatorStack  = []
 
     postfix = []
     prec = {
@@ -35,19 +35,19 @@ def shunt(infix):
         c = infix.pop()
 
         if c == '(':
-            OperationStack.append(c)
+            OperatorStack .append(c)
         elif c == ')':
-            while OperationStack[-1] != '(':
-                postfix.append(OperationStack.pop())
-            OperationStack.pop()
+            while OperatorStack [-1] != '(':
+                postfix.append(OperatorStack .pop())
+            OperatorStack .pop()
         elif c in prec:
-            while OperationStack and prec[c] < prec[OperationStack[-1]]:
-                postfix.append(OperationStack.pop())
-            OperationStack.append(c)
+            while OperatorStack  and prec[c] < prec[OperatorStack [-1]]:
+                postfix.append(OperatorStack .pop())
+            OperatorStack .append(c)
         else:
             postfix.append(c)
-    while OperationStack:
-        postfix.append(OperationStack.pop())
+    while OperatorStack :
+        postfix.append(OperatorStack .pop())
 
     return ''.join(postfix)
 

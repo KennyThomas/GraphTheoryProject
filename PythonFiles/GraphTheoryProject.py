@@ -21,42 +21,39 @@ class Fragment:
 def shunt(infix):
     infix = list(infix)[::-1]
 
-    OperatorStack = []
+    OperationStack = []
 
     postfix = []
-
-    prec = {'*': 100, '.': 80, '|': 60, ')': 40, '(': 20}
+    prec = {
+    '*': 100, 
+    '.': 80, 
+    '|': 60, 
+    ')': 40, 
+    '(': 20}
 
     while infix:
         c = infix.pop()
 
         if c == '(':
-
-            OperatorStack.append(c)
+            OperationStack.append(c)
         elif c == ')':
-
-            while OperatorStack[-1] != '(':
-                postfix.append(OperatorStack.pop())
-
-                OperatorStack.pop()
+            while OperationStack[-1] != '(':
+                postfix.append(OperationStack.pop())
+            OperationStack.pop()
         elif c in prec:
-
-            while OperatorStack and prec[c] < prec[OperatorStack[-1]]:
-                postfix.append(OperatorStack.pop())
-
-                OperatorStack.append(c)
-
-            else:
-                postfix.append(c)
-
-    while OperatorStack:
-        postfix.append(OperatorStack.pop())
+            while OperationStack and prec[c] < prec[OperationStack[-1]]:
+                postfix.append(OperationStack.pop())
+            OperationStack.append(c)
+        else:
+            postfix.append(c)
+    while OperationStack:
+        postfix.append(OperationStack.pop())
 
     return ''.join(postfix)
 
 
-def regex_compile(inflix):
-    postfix = shunt(inflix)
+def compile(infix):
+    postfix = shunt(infix)
     postfix = list(postfix)[::-1]
 
     nfa_stack = []
@@ -67,39 +64,61 @@ def regex_compile(inflix):
             frag1 = nfa_stack.pop()
             frag2 = nfa_stack.pop()
             frag2.accept.edges.append(frag1.start)
-            newFrag = Fragment(frag2.start, frag1.accept)
-
+            newfrag = Fragment(frag2.start, frag1.accept)
+            nfa_stack.append(newfrag)
         elif c == '|':
             frag1 = nfa_stack.pop()
             frag2 = nfa_stack.pop()
             accept = State()
-            Start = State(edges=[frag2.start, frag1.start])
-            frag2.edges.append(accept)
-            frag1.edges.append(accept)
-            newFrag = Fragment(start, accept)
-
+            start = State(edges=[frag2.start, frag1.start])
+            frag1.accept.edges.append(accept)
+            frag2.accept.edges.append(accept)
+            newfrag = Fragment(start, accept)
+            nfa_stack.append(newfrag)
         elif c == '*':
             frag = nfa_stack.pop()
             accept = State()
-            Start = State(edges[frag.start, accept])
-            frag.accept.edges = ([frag.start, accept])
-            newFrag = Fragment(start, accept)
-
+            start = State(edges=[frag.start, accept])
+            frag.accept.edge = ([frag.start, accept])
+            newfrag = Fragment(start, accept)
         else:
             accept = State()
-            Start = State(label=c, edges=[accept])
-            newFrag = Fragment(Start, accept)
-
-        nfa_stack.append(newFrag)
+            initial = State(label=c, edges=[accept])
+            newfrag = Fragment(initial, accept)
+        nfa_stack.append(newfrag)
 
     return nfa_stack.pop()
 
 
+def followes(state, current):
+    if state not in current:
+        current.add(state)
+        if state.label is None:
+            for x in state.edges:
+                followes(x, current)
+
+
 def match(regex, s):
 
-    nfa = regex_compile(regex)
+    nfa = compile(regex)
 
-    return nfa
+    current = set()
+    followes(nfa.start, current)
+    previous = set()
+    for c in s:
+        previous = current
+        current = set()
 
-    print(match("a.b|b*", "bbbbbbbbb"))
-    
+        for state in previous:
+            if state.label is not None:
+                if state.label == c:
+                    followes(state.edges[0], current)
+
+    return nfa.accept in current
+
+
+
+regex = input("Enter regular expression:  ")
+s = input("Enter String to compare:  ")
+
+print("Your statement is :" , match(regex, s))

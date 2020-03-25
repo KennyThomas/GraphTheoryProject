@@ -27,7 +27,9 @@ def shunt(infix):
     prec = {
     '*': 100, 
     '.': 80, 
-    '|': 60, 
+    '|': 60,
+    '+': 50,
+    '?': 45,
     ')': 40, 
     '(': 20}
 
@@ -81,6 +83,21 @@ def compile(infix):
             start = State(edges=[frag.start, accept])
             frag.accept.edge = ([frag.start, accept])
             newfrag = Fragment(start, accept)
+        
+        elif c == '+':
+            frag1 = nfa_stack.pop()
+            frag2 = nfa_stack.pop()
+            frag2.accept.edges.append(frag1.start)
+            newfrag = Fragment(frag2.start, frag1.accept)
+            nfa_stack.append(newfrag)
+        
+        elif c == '?':
+            frag = nfa_stack.pop()
+            accept = State()
+            start = State(edges=[frag.start, accept])
+            frag.accept.edge = ([frag.start, accept])
+            newfrag = Fragment(start, accept)
+
         else:
             accept = State()
             initial = State(label=c, edges=[accept])

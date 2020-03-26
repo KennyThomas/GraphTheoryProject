@@ -25,9 +25,11 @@ def shunt(infix):
 
     postfix = []
     prec = {
-    '*': 100, 
+    '*': 100,
+    '+': 95,
+    '?': 90,
     '.': 80, 
-    '|': 60, 
+    '|': 60,
     ')': 40, 
     '(': 20}
 
@@ -66,6 +68,10 @@ def compile(infix):
             frag2.accept.edges.append(frag1.start)
             newfrag = Fragment(frag2.start, frag1.accept)
             nfa_stack.append(newfrag)
+
+
+
+
         elif c == '|':
             frag1 = nfa_stack.pop()
             frag2 = nfa_stack.pop()
@@ -75,12 +81,28 @@ def compile(infix):
             frag2.accept.edges.append(accept)
             newfrag = Fragment(start, accept)
             nfa_stack.append(newfrag)
+
+
+
+
         elif c == '*':
             frag = nfa_stack.pop()
             accept = State()
             start = State(edges=[frag.start, accept])
-            frag.accept.edge = ([frag.start, accept])
+            frag.accept.edges = ([frag.start, accept])
             newfrag = Fragment(start, accept)
+
+
+
+        
+        elif c == '+':
+            frag = nfa_stack.pop()
+            frag.accept.edges.append(frag.start)
+            newfrag = Fragment(frag.start, frag.accept)
+         
+
+
+              
         else:
             accept = State()
             initial = State(label=c, edges=[accept])
@@ -115,6 +137,8 @@ def match(regex, s):
                     followes(state.edges[0], current)
 
     return nfa.accept in current
+
+
 
 with open('Test.txt', 'r') as RegularExpression:
       regex = RegularExpression.read()

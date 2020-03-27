@@ -1,11 +1,7 @@
 class State:
-    edges = []
-
-    label = None
-
-    def __init__(self, label=None, edges=[]):
-        self.edges = edges
-        self.label = label
+  def __init__(self, label=None, edges=None):
+    self.edges = edges if edges else []
+    self.label = label
 
 
 class Fragment:
@@ -99,6 +95,16 @@ def compile(infix):
             frag = nfa_stack.pop()
             frag.accept.edges.append(frag.start)
             newfrag = Fragment(frag.start, frag.accept)
+
+
+
+        elif c == '?':
+            frag = nfa_stack.pop()
+            accept = State()
+            start = State(edges=[frag.start, accept])
+            frag.accept.edges = ([accept])
+            newfrag = Fragment(start, accept)
+
          
 
 

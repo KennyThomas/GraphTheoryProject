@@ -146,7 +146,14 @@ def match(regex, s):
 
 
 
-regex = input("Enter regular expression:  ")
-s = input("Enter String to compare:  ")
 
-print("Your statement is :" , match(regex, s))
+print("Thomas Kenny")
+print("Graph Theory Project")
+
+option = input("Type 1 to continue or 2 to quit: ")
+while option != "2":
+    regex = input("Enter regular expression:  ") 
+    s = input("Enter String to compare:  ")
+
+    print("Your statement is :" , match(regex, s))
+    option = input("1 to enter another string and regular expression or 2 to quit: ")

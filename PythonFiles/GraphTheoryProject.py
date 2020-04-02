@@ -6,21 +6,21 @@ class State:
 
 class Fragment:
 
-    start = None
-    accept = None
+    start = None #start state of the nfa fragment
+    accept = None #accept state of te nfa fragment
 
     def __init__(self, start, accept):
         self.start = start
         self.accept = accept
 
 
-def shunt(infix):
-    infix = list(infix)[::-1]
+def shunt(infix):   # Shunting algorithm  -- turns infix to postfix
+    infix = list(infix)[::-1] # reverse the list
 
-    OperatorStack  = []
+    OperatorStack  = [] # operator stack created
 
-    postfix = []
-    prec = {
+    postfix = [] # postfix stack created
+    prec = {     #operator precedence
     '*': 100,
     '+': 95,
     '?': 90,
@@ -29,81 +29,81 @@ def shunt(infix):
     ')': 40, 
     '(': 20}
 
-    while infix:
+    while infix:   #loop through the input
         c = infix.pop()
 
-        if c == '(':
-            OperatorStack .append(c)
+        if c == '(':   #decide what to do depending on the character
+            OperatorStack.append(c)
         elif c == ')':
             while OperatorStack [-1] != '(':
-                postfix.append(OperatorStack .pop())
+                postfix.append(OperatorStack.pop())
             OperatorStack .pop()
         elif c in prec:
             while OperatorStack  and prec[c] < prec[OperatorStack [-1]]:
-                postfix.append(OperatorStack .pop())
+                postfix.append(OperatorStack.pop())
             OperatorStack .append(c)
         else:
             postfix.append(c)
     while OperatorStack :
-        postfix.append(OperatorStack .pop())
+        postfix.append(OperatorStack.pop())
 
     return ''.join(postfix)
 
 
 def compile(infix):
     postfix = shunt(infix)
-    postfix = list(postfix)[::-1]
+    postfix = list(postfix)[::-1] # reverse the list
 
-    nfa_stack = []
+    nfa_stack = []   #nfa stack created
 
     while postfix:
-        c = postfix.pop()
-        if c == '.':
-            frag1 = nfa_stack.pop()
+        c = postfix.pop() # pop a character from postfix
+        if c == '.':      #any character accepted
+            frag1 = nfa_stack.pop()   #create two fragments
             frag2 = nfa_stack.pop()
             frag2.accept.edges.append(frag1.start)
-            newfrag = Fragment(frag2.start, frag1.accept)
+            newfrag = Fragment(frag2.start, frag1.accept) #create new instance of fragment to represent the nfa
             nfa_stack.append(newfrag)
 
 
 
 
-        elif c == '|':
-            frag1 = nfa_stack.pop()
+        elif c == '|':    # 0 or 1
+            frag1 = nfa_stack.pop() #create two fragements as in can be 0 or 1 
             frag2 = nfa_stack.pop()
             accept = State()
             start = State(edges=[frag2.start, frag1.start])
             frag1.accept.edges.append(accept)
             frag2.accept.edges.append(accept)
-            newfrag = Fragment(start, accept)
+            newfrag = Fragment(start, accept) #create new instance of fragment to represent the nfa
             nfa_stack.append(newfrag)
 
 
 
 
-        elif c == '*':
-            frag = nfa_stack.pop()
+        elif c == '*':    # 0 or more
+            frag = nfa_stack.pop()  # one fragment it created
             accept = State()
             start = State(edges=[frag.start, accept])
             frag.accept.edges = ([frag.start, accept])
-            newfrag = Fragment(start, accept)
+            newfrag = Fragment(start, accept) #create new instance of fragment to represent the nfa
 
 
 
         
-        elif c == '+':
-            frag = nfa_stack.pop()
+        elif c == '+':  # 1 or more
+            frag = nfa_stack.pop() # one fragment created
             frag.accept.edges.append(frag.start)
-            newfrag = Fragment(frag.start, frag.accept)
+            newfrag = Fragment(frag.start, frag.accept) #create new instance of fragment to represent the nfa
 
 
 
-        elif c == '?':
-            frag = nfa_stack.pop()
+        elif c == '?':  # 0 or 1
+            frag = nfa_stack.pop() # one fragment created
             accept = State()
             start = State(edges=[frag.start, accept])
             frag.accept.edges = ([accept])
-            newfrag = Fragment(start, accept)
+            newfrag = Fragment(start, accept) #create new instance of fragment to represent the nfa
 
          
 
@@ -113,7 +113,7 @@ def compile(infix):
             accept = State()
             initial = State(label=c, edges=[accept])
             newfrag = Fragment(initial, accept)
-        nfa_stack.append(newfrag)
+        nfa_stack.append(newfrag) #push the new nfa instance of fragment to represent te new nfa
 
     return nfa_stack.pop()
 
@@ -126,23 +126,23 @@ def followes(state, current):
                 followes(x, current)
 
 
-def match(regex, s):
+def match(regex, s):  # match the regular expression with a string
 
     nfa = compile(regex)
 
     current = set()
     followes(nfa.start, current)
     previous = set()
-    for c in s:
+    for c in s:    #loop through characters in s
         previous = current
-        current = set()
+        current = set()  #create new empty set
 
         for state in previous:
             if state.label is not None:
                 if state.label == c:
-                    followes(state.edges[0], current)
+                    followes(state.edges[0], current) #add the state at the end of te arrow to current
 
-    return nfa.accept in current
+    return nfa.accept in current    #see if it matches the string 
 
 
 
@@ -150,7 +150,7 @@ def match(regex, s):
 print("Thomas Kenny")
 print("Graph Theory Project")
 
-option = input("Type 1 to continue or 2 to quit: ")
+option = input("Type 1 to continue or 2 to quit: ") # option to retry another string  or quit
 while option != "2":
     regex = input("Enter regular expression:  ") 
     s = input("Enter String to compare:  ")

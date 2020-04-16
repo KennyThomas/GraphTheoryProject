@@ -1,3 +1,5 @@
+import argparse
+
 class State:
   def __init__(self, label=None, edges=None):
     self.edges = edges if edges else []
@@ -145,15 +147,27 @@ def match(regex, s):  # match the regular expression with a string
     return nfa.accept in current    #see if it matches the string 
 
 
+parser = argparse.ArgumentParser(description='Enter a regular expression and  a String to compare' , prog='GraphTheoryProject')
+parser.add_argument('-r', '--regex' , type=str  , metavar='' ,help='A regular expression')
+parser.add_argument('-s', '--s', type=str, metavar='' , help='A string to match')
+parser.add_argument('--version', '-v',  action='version', version='%(prog)s 2.0')
+parser.add_argument('--SampleInput', '-si', help='Provides sample input',  action='version', version='Regular expression = b*  | String = bbbbbb  | Result = True')
+parser.add_argument('--info' , '-i', action='version',version='*Thompsons Alogorithm* is a method of transforming a regular expression into an equivalent nondeterministic finite automaton (NFA) , This NFA can be used to match strings against the regular expression.'  ,  help='Information on project')
+args = parser.parse_args()
+
+if any(vars(args).values()):
+    print("Result:")
+    print("Your statement is :" , match(args.regex, args.s))
 
 
-print("Thomas Kenny")
-print("Graph Theory Project")
 
-option = input("Type 1 to continue or 2 to quit: ") # option to retry another string  or quit
-while option != "2":
-    regex = input("Enter regular expression:  ") 
-    s = input("Enter String to compare:  ")
 
-    print("Your statement is :" , match(regex, s))
-    option = input("1 to enter another string and regular expression or 2 to quit: ")
+elif not any(vars(args).values()):
+    option = input("Enter 1 to continue or 2 to quit ")
+    while option != "2":
+        regex = input("Enter regular expression:  ") 
+        s = input("Enter String to compare:  ")
+        print("Result:")
+        print("Your statement is :" , match(regex,s))
+        option = input("Enter details | 2 if you want quit") # option to retry another string  or quit
+       

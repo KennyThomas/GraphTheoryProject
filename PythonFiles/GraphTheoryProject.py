@@ -128,6 +128,15 @@ def followes(state, current):
                 followes(x, current)
 
 
+
+def Test(self):
+    assert match("b*","bbbbbbbbb") is True
+    assert match("b+" , "b") is True
+    assert match("b+" ,"  ") is False
+    assert match("b?","b") is True
+    assert match("b.b|b","b") is True
+
+
 def match(regex, s):  # match the regular expression with a string
 
     nfa = compile(regex)
@@ -163,11 +172,12 @@ if any(vars(args).values()):
 
 
 elif not any(vars(args).values()):
+    Test(self=Test)
     option = input("Enter 1 to continue or 2 to quit ")
     while option != "2":
         regex = input("Enter regular expression:  ") 
         s = input("Enter String to compare:  ")
         print("Result:")
         print("Your statement is :" , match(regex,s))
-        option = input("Enter details | 2 if you want quit") # option to retry another string  or quit
+        option = input("Enter 1 to continue or 2 to quit ") # option to retry another string  or quit
        

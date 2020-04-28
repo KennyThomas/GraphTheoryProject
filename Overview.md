@@ -13,30 +13,28 @@ To run this code first you need to download it. To do this create a folder on yo
 To Run the Python file you need to have Python 3 installed on your machine. If you don't have Python installed follow the steps shown here.
 
 ### Installing Python
-To install Python navigate to the page https://www.python.org/ .<br>
-Once on this page go to the download section. <br>
-Choose version e.g Windows, Linux <br>
-Once the installer is downloaded run and wait for it to be installed. <br>
+ 
+* To install Python navigate to the page https://www.python.org/ .<br>
+* Once on this page go to the download section. <br>
+* Choose version e.g Windows, Linux <br>
+* Once the installer is downloaded run and wait for it to be installed. <br>
 
 ### Running the Programme
-Once Pyton is installed cd into Python files.<br>
-Run the command Python GraphTheoryProject.py .This will run the programme.<br>
-Next you should see an option to continue or quit. <br>
-Type 1 to continue or 2 to quit.<br>
-Enter in a Regular expression e.g "b?" <br>
-Next, enter in a string to compare eg "b" <br>
+* Once Pyton is installed cd into Python files.<br>
+* Run the command Python GraphTheoryProject.py .This will run the programme.<br>
+* Next you should see an option to continue or quit. <br>
+* Type 1 to continue or 2 to quit.<br>
+* Enter in a Regular expression e.g "b?" <br>
+* Next, enter in a string to compare eg "b" <br>
+* Result should be as shown <br>
+<br>
+![Sample Input](Images/Input.PNG)
+
 
 If you want to use the commands line use the following Python GraphTheoryProject.py --help  . <br>
 This will display help if you require. As shown here.<br>
+<br>
 ![Command Line](Images/CommandLinePNG.PNG)
-
-
-
-
-
-
-
-
 
 ## `Test`
 

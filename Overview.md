@@ -1,5 +1,5 @@
 # `Graph Theory Project Overview`
-Execute regular expressions on strings using an algorithm known as Thompson’s construction
+Explanation of Project work for the Graph Theory Project
 
 ## `Introduction`
 For this project we were tasked with writing a program in python to execute regular expressions on strings using an algorithm known as Thompson's Contruction.
@@ -41,12 +41,18 @@ This will display help if you require. As shown here.<br>
 ![Command Line](Images/CommandLinePNG.PNG)
 
 ## `Test`
-
-
-
-
-
+* In the menu you will see an option to run tests.
+* Type 3 to run the test.
+* If there is an error in the test it will display saying which test had the error.
+* If all tests pass you will see a message saying "Tests finished with zero erros"
+* You will then return to the menu <br>
+  These tests were made using Python assert. <br>
+  Assert is used for debugging that tests a condition , if the condition is true the project continues as normal <br>
+  If the the value is false it ouputs the error.
+  
+  
 ## `Algorithm`
+
 
 
 
@@ -57,8 +63,13 @@ This will display help if you require. As shown here.<br>
 
 ## `References`
    GMIT lecture videos <br>
+   These videos were used to help construct the project.
+ 
    Regular expression cheat sheet https://www.debuggex.com/cheatsheet/regex/python <br>
+   I used this cheat sheet to understand the values of special characters like the ? and + <br>
+   
    Python https://www.python.org/<br>
+   Python was the language we were required to make the project with
    
    
 

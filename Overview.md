@@ -9,8 +9,13 @@ In my repository it includes on python file called GraphTheoryProject.py this in
 ## `Run`
 
 ### Download Project
-To run this code first you need to download it. To do this create a folder on your computer. Go to the command line and cd into the folder just created for example "cd Desktop/FolderName". Once this is done use the command "Git clone url" the url should be given on the frontpage of the repository. If this is done succesfully the project should be downloaded in the file you just created.
-To Run the Python file you need to have Python 3 installed on your machine. If you don't have Python installed follow the steps shown here.
+* To run this code first you need to download it.<br> 
+* To do this create a folder on your computer. 
+* Go to the command line and cd into the folder just created for example "cd Desktop/FolderName". 
+* Once this is done use the command "Git clone url" the url should be given on the frontpage of the repository. 
+* If this is done succesfully the project should be downloaded in the file you just created.
+* To Run the Python file you need to have Python 3 installed on your machine. <br>
+  If you don't have Python installed follow the steps shown here.
 
 ### Installing Python
  

@@ -27,7 +27,6 @@ To Run the Python file you need to have Python 3 installed on your machine. If y
 * Enter in a Regular expression e.g "b?" <br>
 * Next, enter in a string to compare eg "b" <br>
 * Result should be as shown <br>
-<br>
 ![Sample Input](Images/Input.PNG)
 
 

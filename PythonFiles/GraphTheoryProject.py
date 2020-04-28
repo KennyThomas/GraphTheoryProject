@@ -129,12 +129,38 @@ def followes(state, current):
 
 
 
-def Test(self):
-    assert match("b*","bbbbbbbbb") is True
-    assert match("b+" , "b") is True
-    assert match("b+" ,"  ") is False
-    assert match("b?","b") is True
-    assert match("b.b|b","b") is True
+
+
+def Menu(self):
+    option = input("Enter 1 to continue , 2 to quit , or 3 to run tests  ")
+
+    if option == "1":
+        regex = input("Enter regular expression:  ") 
+        s = input("Enter String to compare:  ")
+        print("Result:")
+        print("Your statement is :" , match(regex,s))
+        Menu(self=Menu)
+    
+    elif option == "2":
+        exit()
+
+    elif option == "3":
+        print("Running Tests please wait..........")
+        tests = [
+            ["b*","bbbbbbbbb",  True],
+            ["b+" , "b" , True],
+            ["b+" ,"  " , False],
+            ["b?","b" , True],
+            ["b.b|b","b",  True]
+        ]
+        
+        for test in tests:
+            assert match(test[0],test[1]) == test[2] , test[0] + (" should match " if test[2] else  " should not match ") + test[1]
+            
+        print("Tests finished with zero errors")
+        print("")
+        Menu(self=Menu)
+
 
 
 def match(regex, s):  # match the regular expression with a string
@@ -172,12 +198,12 @@ if any(vars(args).values()):
 
 
 elif not any(vars(args).values()):
-    Test(self=Test)
-    option = input("Enter 1 to continue or 2 to quit ")
-    while option != "2":
-        regex = input("Enter regular expression:  ") 
-        s = input("Enter String to compare:  ")
-        print("Result:")
-        print("Your statement is :" , match(regex,s))
-        option = input("Enter 1 to continue or 2 to quit ") # option to retry another string  or quit
+    Menu(self=Menu)
+
+        
+
+
+
+
+
        

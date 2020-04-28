@@ -48,10 +48,72 @@ This will display help if you require. As shown here.<br>
 * You will then return to the menu <br>
   These tests were made using Python assert. <br>
   Assert is used for debugging that tests a condition , if the condition is true the project continues as normal <br>
-  If the the value is false it ouputs the error.
+  If the the value is false it ouputs the error.<br>
+  These are the following tests included with the project
+  ```python 
+     tests = [
+            ["b*","bbbbbbbbb",  True],
+            ["b+" , "b" , True],
+            ["b+" ,"  " , False],
+            ["b?","b" , True],
+            ["b.b|b","b",  True]
+        ]
+        ```
+  
   
   
 ## `Algorithm`
+### Shunting-yard Algorithm
+  This algorithm is used for changing the expression from infix to postfix notation. (Also known as Reverse Polish Notation)
+  Invented by Edsger Dijkstra <br>
+  This is achieved by doing the following steps
+* Firstly we take in a regular expression
+* We then put it into a list and using the following code [::-1] we reverse the list
+* Once the list if reversed we pass it through a while loop to decide what do with, taking in account of the precedence.
+
+```python
+infix = list(infix)[::-1] 
+
+    OperatorStack  = [] 
+
+    postfix = [] 
+    prec = {     #operator precedence
+    '*': 100,
+    '+': 95,
+    '?': 90,
+    '.': 80, 
+    '|': 60,
+    ')': 40, 
+    '(': 20}
+   ``` 
+    
+    
+* In the project we create a Operator Stack.
+* Depending on the characters we add or pop from the stack until we are left with the expression in postfix notation.
+
+We use the following code to achive this
+
+
+ ```python
+ while infix:   
+        c = infix.pop()
+        if c == '(':   
+            OperatorStack.append(c)
+        elif c == ')':
+            while OperatorStack [-1] != '(':
+                postfix.append(OperatorStack.pop())
+            OperatorStack .pop()
+        elif c in prec:
+            while OperatorStack  and prec[c] < prec[OperatorStack [-1]]:
+                postfix.append(OperatorStack.pop())
+            OperatorStack .append(c)
+        else:
+            postfix.append(c)
+    while OperatorStack :
+        postfix.append(OperatorStack.pop())
+    return ''.join(postfix)
+```
+### Thompson's Contruction Algorithm
 
 
 

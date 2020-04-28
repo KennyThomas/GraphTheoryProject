@@ -27,7 +27,8 @@ Enter in a Regular expression e.g "b?" <br>
 Next, enter in a string to compare eg "b" <br>
 
 If you want to use the commands line use the following Python GraphTheoryProject.py --help  . <br>
-This will display help if you require.
+This will display help if you require. As shown here.<br>
+![Command Line](Images/CommandLinePNG.PNG)
 
 
 

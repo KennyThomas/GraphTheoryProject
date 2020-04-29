@@ -114,10 +114,61 @@ We use the following code to achive this
     return ''.join(postfix)
 ```
 ### Thompson's Contruction Algorithm
+This a algorithm used for transforming a regular expression into a nondeterministic finite automaton (NFA). For this project we used this algorithm to match strings to a regular expression.<br>
+Credited to Ken Thompson.<br>
+We can perform this algorithm by doing the following steps.
+* First we will take in our expression that has passed through the shunting-yard algorithm.
+```python
+    postfix = shunt(infix)
+    postfix = list(postfix)[::-1]
+  ```
+    
+* Next we will create a nfa Stack.
+* Once this is done we will loop the postfix list and pop fragments of the list and add them to the stack.
+* We will perform different operations depending on the character.
+### The "." operator
+```python
+   if c == '.':  #any character accepted
+            frag1 = nfa_stack.pop()   #create two fragments
+            frag2 = nfa_stack.pop()
+            frag2.accept.edges.append(frag1.start)
+            newfrag = Fragment(frag2.start, frag1.accept) #create new instance of fragment to represent the nfa
+            nfa_stack.append(newfrag)
+  ```
+ ### The "|" operator
+ ```python
+ elif c == '|':    # 0 or 1
+            frag1 = nfa_stack.pop() #create two fragements as in can be 0 or 1 
+            frag2 = nfa_stack.pop()
+            accept = State()
+            start = State(edges=[frag2.start, frag1.start])
+            frag1.accept.edges.append(accept)
+            frag2.accept.edges.append(accept)
+            newfrag = Fragment(start, accept) #create new instance of fragment to represent the nfa
+            nfa_stack.append(newfrag)
+ ```
+ ### The "*" operator 
+ ```python
+  elif c == '*':    # 0 or more
+            frag = nfa_stack.pop()  # one fragment it created
+            accept = State()
+            start = State(edges=[frag.start, accept])
+            frag.accept.edges = ([frag.start, accept])
+            newfrag = Fragment(start, accept) #create new instance of fragment to represent the nfa
+  ```
+  
+  ### The "+" operator.
+  ```python
+    elif c == '+':  # 1 or more
+            frag = nfa_stack.pop() # one fragment created
+            frag.accept.edges.append(frag.start)
+            newfrag = Fragment(frag.start, frag.accept) #create new instance of fragment to represent the nfa
+  ```
 
 
-
-
+  
+         
+                  
 
 
 

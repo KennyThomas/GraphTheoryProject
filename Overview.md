@@ -164,16 +164,51 @@ We can perform this algorithm by doing the following steps.
             frag.accept.edges.append(frag.start)
             newfrag = Fragment(frag.start, frag.accept) #create new instance of fragment to represent the nfa
   ```
+  ### The "?" operator
+  ```python
+     elif c == '?':  # 0 or 1
+            frag = nfa_stack.pop() # one fragment created
+            accept = State()
+            start = State(edges=[frag.start, accept])
+            frag.accept.edges = ([accept])
+            newfrag = Fragment(start, accept) #create new instance of fragment to represent the nfa
+ ```
+ * If it is not one of the special characters we will perform this operation
+ ```python
+ else:
+            accept = State()
+            initial = State(label=c, edges=[accept])
+            newfrag = Fragment(initial, accept)
+  ```
+  * After each operation we push the new nfa instance of fragment to represent the new nfa
+  ```python
+   nfa_stack.append(newfrag)
+   ```
+   
+  * Once we have the nfa created we can perform a match against the string
+  ```python
+  def match(regex, s):  # match the regular expression with a string
 
+    nfa = compile(regex)
 
+    current = set()
+    followes(nfa.start, current)
+    previous = set()
+    for c in s:    #loop through characters in s
+        previous = current
+        current = set()  #create new empty set
+
+        for state in previous:
+            if state.label is not None:
+                if state.label == c:
+                    followes(state.edges[0], current) #add the state at the end of the arrow to current
+
+    return nfa.accept in current    #see if it matches the string 
+```
   
-         
-                  
-
-
-
-
-
+  
+        
+              
 ## `References`
    GMIT lecture videos <br>
    These videos were used to help construct the project.

@@ -40,6 +40,34 @@ This will display help if you require. As shown here.<br>
 <br>
 ![Command Line](Images/CommandLinePNG.PNG)
 
+### Command line
+To implement the command line I used argpare. <br>
+I wasn't too familiar with argparse so I had to do research into it , I will reference the website I used in the references section.<br>
+I used the following code to implement the command line <br>
+```python
+parser = argparse.ArgumentParser(description='Enter a regular expression and  a String to compare' , prog='GraphTheoryProject')
+parser.add_argument('-r', '--regex' , type=str  , metavar='' ,help='A regular expression')
+parser.add_argument('-s', '--s', type=str, metavar='' , help='A string to match')
+parser.add_argument('--version', '-v',  action='version', version='%(prog)s 2.0')
+parser.add_argument('--SampleInput', '-si', help='Provides sample input',  action='version', version='Regular expression = b*  | String = bbbbbb  | Result = True')
+parser.add_argument('--info' , '-i', action='version',version='*Thompsons Alogorithm* is a method of transforming a regular expression into an equivalent nondeterministic finite automaton (NFA) , This NFA can be used to match strings against the regular expression.'  ,  help='Information on project')
+args = parser.parse_args()
+
+if any(vars(args).values()):
+    print("Result:")
+    print("Your statement is :" , match(args.regex, args.s))
+
+elif not any(vars(args).values()):
+    Menu(self=Menu)
+```
+* The user can see what the variables means like regex and s.
+* Version shows the current version of the project.
+* Sample input gives you input to test the project if your not sure what to enter.
+* info gives you a background to the project
+* If none of these arguments are called when they run "Python GraphTheoryProject.py --help " for example, they will be brought to the menu.
+
+
+
 ## `Test`
 * In the menu you will see an option to run tests.
 * Type 3 to run the test.

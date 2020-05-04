@@ -25,8 +25,16 @@ Our output will be displayed either true or false
 
 ## `References`
    GMIT lecture videos <br>
+   These videos were used to help construct the project.
+ 
    Regular expression cheat sheet https://www.debuggex.com/cheatsheet/regex/python <br>
+   I used this cheat sheet to understand the values of special characters like the ? and + <br>
+   
+   Argparse https://docs.python.org/3/howto/argparse.html<br>
+   I used this tutorial to understand how to implement command line arguements <br> 
+   
    Python https://www.python.org/<br>
+   Python was the language we were required to make the project with
    
    
 

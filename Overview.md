@@ -45,6 +45,13 @@ This will display help if you require. As shown here.<br>
 * Type 3 to run the test.
 * If there is an error in the test it will display saying which test had the error.
 * If all tests pass you will see a message saying "Tests finished with zero erros"
+
+```python 
+        
+        print("Tests finished with zero errors")
+        print("")
+        Menu(self=Menu)
+```
 * You will then return to the menu <br>
   These tests were made using Python assert. <br>
   Assert is used for debugging that tests a condition , if the condition is true the project continues as normal <br>

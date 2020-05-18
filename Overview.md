@@ -4,7 +4,7 @@ Explanation of Project work for the Graph Theory Project
 ## `Introduction`
 For this project we were tasked with writing a program in python to execute regular expressions on strings using an algorithm known as Thompson's Contruction.
 Using this algorithm we build a non-deterministic finite automaton (NFA) from a regular expression, and can use the NFA to check if the regular expression matches any given string of text.
-In my repository it includes on python file called GraphTheoryProject.py this includes the code for the main project. There is also another file that takes in a two txt files and compares them using the algorithm. These are located in the folder called PythonFiles. There is Research document included in the Repository, this shows the research I did for the project. In the main python file there is a command line included if you require help with the project, I will go into detail about this command line further on. There is also various tests I used in the main project file. I will explain these tests in the "Test" section.
+In my repository it includes a python file called GraphTheoryProject.py, this includes the code for the main project. There is also another file that takes in two text files and compares them using the algorithm. These are located in the folder called PythonFiles. There is Research document included in the Repository, this shows the research I did for the project. In the main python file there is a command line included if you require help with the project, I will go into detail about this command line further on. There is also various tests I used in the main project file. I will explain these tests in the "Test" section.
 
 ## `Run`
 
@@ -25,8 +25,8 @@ In my repository it includes on python file called GraphTheoryProject.py this in
 * Once the installer is downloaded run and wait for it to be installed. <br>
 
 ### Running the Programme
-* Once Pyton is installed cd into Python files.<br>
-* Run the command Python GraphTheoryProject.py .This will run the programme.<br>
+* Once Python is installed cd into Python files.<br>
+* Run the command Python GraphTheoryProject.py. This will run the programme.<br>
 * Next you should see an option to continue or quit. <br>
 * Type 1 to continue or 2 to quit.<br>
 * Enter in a Regular expression e.g "b?" <br>
@@ -35,7 +35,7 @@ In my repository it includes on python file called GraphTheoryProject.py this in
 ![Sample Input](Images/Input.PNG)
 
 
-If you want to use the commands line use the following Python GraphTheoryProject.py --help  . <br>
+If you want to use the command line use the following Python GraphTheoryProject.py --help  . <br>
 This will display help if you require. As shown here.<br>
 <br>
 ![Command Line](Images/CommandLinePNG.PNG)
@@ -60,10 +60,10 @@ if any(vars(args).values()):
 elif not any(vars(args).values()):
     Menu(self=Menu)
 ```
-* The user can see what the variables means like regex and s.
+* The user can see what the variables mean like regex and s.
 * Version shows the current version of the project.
-* Sample input gives you input to test the project if your not sure what to enter.
-* info gives you a background to the project
+* Sample input gives you input to test the project if you are not sure what to enter.
+* Info gives you a background to the project
 * If none of these arguments are called when they run "Python GraphTheoryProject.py --help " for example, they will be brought to the menu.
 
 
@@ -83,7 +83,7 @@ elif not any(vars(args).values()):
 * You will then return to the menu <br>
   These tests were made using Python assert. <br>
   Assert is used for debugging that tests a condition , if the condition is true the project continues as normal <br>
-  If the the value is false it ouputs the error.<br>
+  If the value is false it ouputs the error.<br>
   These are the following tests included with the project
   ```python 
      tests = [
@@ -103,7 +103,7 @@ elif not any(vars(args).values()):
   Invented by Edsger Dijkstra <br>
   This is achieved by doing the following steps
 * Firstly we take in a regular expression
-* We then put it into a list and using the following code [::-1] we reverse the list
+* We then put it into a list and using the following code [::-1] to reverse the list.
 * Once the list if reversed we pass it through a while loop to decide what do with, taking in account of the precedence.
 
 ```python
@@ -149,7 +149,7 @@ We use the following code to achive this
     return ''.join(postfix)
 ```
 ### Thompson's Contruction Algorithm
-This a algorithm used for transforming a regular expression into a nondeterministic finite automaton (NFA). For this project we used this algorithm to match strings to a regular expression.<br>
+This is a algorithm used for transforming a regular expression into a nondeterministic finite automaton (NFA). For this project we used this algorithm to match strings to a regular expression.<br>
 Credited to Ken Thompson.<br>
 We can perform this algorithm by doing the following steps.
 * First we will take in our expression that has passed through the shunting-yard algorithm.
@@ -215,12 +215,12 @@ We can perform this algorithm by doing the following steps.
             initial = State(label=c, edges=[accept])
             newfrag = Fragment(initial, accept)
   ```
-  * After each operation we push the new nfa instance of fragment to represent the new nfa
+  * After each operation we push the new nfa instance of fragment to represent the new nfa.
   ```python
    nfa_stack.append(newfrag)
    ```
    
-  * Once we have the nfa created we can perform a match against the string
+  * Once we have the nfa created we can perform a match against the string.
   ```python
   def match(regex, s):  # match the regular expression with a string
 

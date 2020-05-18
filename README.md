@@ -2,11 +2,18 @@
 Execute regular expressions on strings using an algorithm known as Thompson’s construction
 
 ## `Deployment`
-Open up the folder in the directory of the .py file.<br>
-Run Python GraphTheoryProject.py<br>
-Enter in a regular expression for example " a.b|b* " <br>
-Next enter in a string to compare for example "bbbbbb"<br>
-Result will either be true or false
+* Open up the folder in the directory of the .py file.
+* Run Python GraphTheoryProject.py.
+* You will be given an option of using command line arguements e.g --help
+* These options are shown in the overview.md file
+* These arguements will offer help if the user requires it.<br>
+ Or 
+* Continue with the project
+* You will enter the menu and can choose to run tests to see if it works.
+* If you choose to continue follow the following steps.
+* Enter in a regular expression for example " a.b|b* " 
+* Next enter in a string to compare for example "bbbbbb"
+* Result will either be true or false.
 
 
 ## `How it works`
